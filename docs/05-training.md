@@ -38,12 +38,22 @@ loss = -( Σ_{(i,j)∈GT} S[i,j]
 - 默认 `--init converted` 从官方权重微调（loss 起点低）；
   `--init scratch` 从零开始，更能直观看到"匹配数 0→有、loss ↓"。
 
-## 实测（CPU，500 步，512 kpts/图）
+## 实测（CPU，500 步，lr 3e-4，512 kpts/图，从零初始化）
 
-从零初始化：loss 从 ~2 降到 ~0.7，留出验证对 graf1-6 上的
-匹配数从 0 涨到几十，GT 精度从 0% 开始爬升。
-150 步微调官方权重则进一步改善了困难对的匹配数。
-（这只是 pipeline 验证；真要逼近论文指标请换 GPU + glue-factory。）
+```
+eval graf:1-6 训练前: 0 matches, 精度 0%
+step 0    loss 1.97
+step 330  loss 0.18   eval: 26 matches, 26.9% correct   <- 峰值
+step 499  loss 0.17   eval: 21 matches, 19.0% correct
+```
+
+loss 单调下降、匹配数 0→数十、留出对上的 GT 精度从 0% 升到 ~20–27%。
+量还不大（CPU 上只跑了 500 步、14 对图），但**证明了完整链路**：
+GT 构造 → 逐层分配损失 → 反传只更新 matcher → 泛化到未训练对。
+日志存于 `results/train_scratch.log`，产物 `weights/lightglue_trained_scratch.pth`。
+
+要逼近论文指标请换 GPU + glue-factory + MegaDepth；这个 demo 的价值是
+"pipeline 我全懂且能跑通"。
 
 ## 学到的
 

@@ -1,0 +1,55 @@
+training pairs: 14, kpts/img: 512
+eval graf:1-6 before training: 0 matches, GT precision 0.00%
+step    0  pair graf:1-5  loss 1.9677   eval: 0 matches, 0.0% correct
+step   10  pair wall:1-2  loss 2.5292   eval: 2 matches, 0.0% correct
+step   20  pair wall:1-6  loss 1.5159   eval: 18 matches, 5.6% correct
+step   30  pair graf:1-2  loss 1.7497   eval: 8 matches, 25.0% correct
+step   40  pair boat:1-6  loss 1.2544   eval: 39 matches, 7.7% correct
+step   50  pair wall:1-4  loss 0.9911   eval: 44 matches, 11.4% correct
+step   60  pair boat:1-2  loss 1.2735   eval: 47 matches, 17.0% correct
+step   70  pair graf:1-5  loss 0.7167   eval: 19 matches, 15.8% correct
+step   80  pair wall:1-2  loss 0.9488   eval: 94 matches, 9.6% correct
+step   90  pair wall:1-6  loss 0.6341   eval: 118 matches, 10.2% correct
+step  100  pair graf:1-2  loss 0.9082   eval: 19 matches, 26.3% correct
+step  110  pair boat:1-6  loss 0.5967   eval: 80 matches, 12.5% correct
+step  120  pair wall:1-4  loss 0.5484   eval: 89 matches, 7.9% correct
+step  130  pair boat:1-2  loss 0.7861   eval: 76 matches, 9.2% correct
+step  140  pair graf:1-5  loss 0.4035   eval: 30 matches, 20.0% correct
+step  150  pair wall:1-2  loss 0.5288   eval: 74 matches, 9.5% correct
+step  160  pair wall:1-6  loss 0.4494   eval: 45 matches, 15.6% correct
+step  170  pair graf:1-2  loss 0.5656   eval: 37 matches, 21.6% correct
+step  180  pair boat:1-6  loss 0.4353   eval: 61 matches, 11.5% correct
+step  190  pair wall:1-4  loss 0.3567   eval: 62 matches, 12.9% correct
+step  200  pair boat:1-2  loss 0.4702   eval: 44 matches, 13.6% correct
+step  210  pair graf:1-5  loss 0.2511   eval: 54 matches, 13.0% correct
+step  220  pair wall:1-2  loss 0.3217   eval: 45 matches, 17.8% correct
+step  230  pair wall:1-6  loss 0.2522   eval: 31 matches, 9.7% correct
+step  240  pair graf:1-2  loss 0.3389   eval: 37 matches, 21.6% correct
+step  250  pair boat:1-6  loss 0.2909   eval: 49 matches, 10.2% correct
+step  260  pair wall:1-4  loss 0.2299   eval: 38 matches, 26.3% correct
+step  270  pair boat:1-2  loss 0.3241   eval: 30 matches, 6.7% correct
+step  280  pair graf:1-5  loss 0.1844   eval: 26 matches, 15.4% correct
+step  290  pair wall:1-2  loss 0.2409   eval: 26 matches, 15.4% correct
+step  300  pair wall:1-6  loss 0.1519   eval: 19 matches, 26.3% correct
+step  310  pair graf:1-2  loss 0.2465   eval: 28 matches, 28.6% correct
+step  320  pair boat:1-6  loss 0.1564   eval: 17 matches, 29.4% correct
+step  330  pair wall:1-4  loss 0.1759   eval: 26 matches, 26.9% correct
+step  340  pair boat:1-2  loss 0.2350   eval: 33 matches, 18.2% correct
+step  350  pair graf:1-5  loss 0.1173   eval: 30 matches, 20.0% correct
+step  360  pair wall:1-2  loss 0.1856   eval: 30 matches, 20.0% correct
+step  370  pair wall:1-6  loss 0.1888   eval: 28 matches, 14.3% correct
+step  380  pair graf:1-2  loss 0.1699   eval: 21 matches, 23.8% correct
+step  390  pair boat:1-6  loss 0.1155   eval: 33 matches, 24.2% correct
+step  400  pair wall:1-4  loss 0.1496   eval: 44 matches, 20.5% correct
+step  410  pair boat:1-2  loss 0.2866   eval: 28 matches, 25.0% correct
+step  420  pair graf:1-5  loss 0.1460   eval: 32 matches, 18.8% correct
+step  430  pair wall:1-2  loss 0.1618   eval: 32 matches, 12.5% correct
+step  440  pair wall:1-6  loss 0.1551   eval: 18 matches, 16.7% correct
+step  450  pair graf:1-2  loss 0.1529   eval: 32 matches, 12.5% correct
+step  460  pair boat:1-6  loss 0.1079   eval: 30 matches, 10.0% correct
+step  470  pair wall:1-4  loss 0.1262   eval: 29 matches, 10.3% correct
+step  480  pair boat:1-2  loss 0.1693   eval: 35 matches, 11.4% correct
+step  490  pair graf:1-5  loss 0.0893   eval: 28 matches, 14.3% correct
+step  499  pair boat:1-4  loss 0.1675   eval: 21 matches, 19.0% correct
+eval after training: 21 matches, GT precision 19.05%
+saved weights/lightglue_trained_scratch.pth

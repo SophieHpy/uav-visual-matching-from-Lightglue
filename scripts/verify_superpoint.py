@@ -24,7 +24,7 @@ DEV = torch.device("cpu")
 def main():
     ours = SuperPoint(max_num_keypoints=2048).eval()
     sd = torch.load(ROOT / "weights/superpoint_converted.pth", weights_only=True)
-    missing, unexpected = ours.load_state_dict(sd, strict=True), None
+    ours.load_state_dict(sd, strict=True)
     print("state dict loaded strict=True")
 
     ref = OfficialSP(max_num_keypoints=2048).eval()

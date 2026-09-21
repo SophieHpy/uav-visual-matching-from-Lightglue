@@ -16,7 +16,6 @@ Usage: python scripts/train_mini.py [--steps 150] [--init converted]
 """
 
 import argparse
-import importlib.util
 import sys
 from pathlib import Path
 
