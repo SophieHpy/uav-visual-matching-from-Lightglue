@@ -13,6 +13,7 @@ keypoint" dustbin; dropping the dustbin after softmax yields a dense
 score map at 1/8 resolution that is unfolded back to image resolution.
 """
 
+import kornia
 import torch
 import torch.nn.functional as F
 from kornia.color import rgb_to_grayscale
@@ -177,12 +178,22 @@ class SuperPoint(nn.Module):
         }
 
     @torch.no_grad()
-    def extract(self, image: torch.Tensor) -> dict:
-        """Convenience wrapper: add batch dim, record original image size."""
+    def extract(self, image: torch.Tensor, resize: int = 1024) -> dict:
+        """Detect on a resized image (long edge = `resize`), report
+        keypoints in original-image coordinates."""
         if image.dim() == 3:
             image = image[None]
         h, w = image.shape[-2:]
+        if resize is not None:
+            image = kornia.geometry.transform.resize(
+                image, resize, side="long", antialias=True
+            )
+        scale = torch.tensor(
+            [image.shape[-1] / w, image.shape[-2] / h],
+            device=image.device, dtype=torch.float,
+        )
         out = self.forward(image)
+        out["keypoints"] = (out["keypoints"] + 0.5) / scale[None, None] - 0.5
         out["image_size"] = torch.tensor(
             [w, h], device=image.device, dtype=torch.float
         )[None]

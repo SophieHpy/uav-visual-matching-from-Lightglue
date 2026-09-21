@@ -46,11 +46,11 @@ def convert_superpoint() -> Path:
     return dest
 
 
-def convert_lightglue() -> Path:
+def convert_lightglue(feature: str = "superpoint") -> Path:
     """Map official keys (old flat + new nested) onto src/lightglue.py."""
     sd = torch.hub.load_state_dict_from_url(
-        BASE + "superpoint_lightglue.pth",
-        file_name="official_superpoint_lightglue.pth",
+        BASE + f"{feature}_lightglue.pth",
+        file_name=f"official_{feature}_lightglue.pth",
     )
     out = {}
     for key, value in sd.items():
@@ -75,9 +75,9 @@ def convert_lightglue() -> Path:
     out["confidence_thresholds"] = torch.tensor(
         [np.clip(0.8 + 0.1 * np.exp(-4.0 * i / 9), 0, 1) for i in range(9)]
     )
-    dest = WEIGHTS / "lightglue_superpoint_converted.pth"
+    dest = WEIGHTS / f"lightglue_{feature}_converted.pth"
     torch.save(out, dest)
-    print(f"lightglue: {len(out)} tensors -> {dest.name}")
+    print(f"lightglue[{feature}]: {len(out)} tensors -> {dest.name}")
     leftover = [k for k in out if k.startswith(("self_attn.", "cross_attn."))]
     assert not leftover, leftover
     return dest
@@ -86,4 +86,5 @@ def convert_lightglue() -> Path:
 if __name__ == "__main__":
     WEIGHTS.mkdir(exist_ok=True)
     convert_superpoint()
-    convert_lightglue()
+    convert_lightglue("superpoint")
+    convert_lightglue("sift")

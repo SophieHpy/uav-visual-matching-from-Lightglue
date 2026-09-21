@@ -1,0 +1,16 @@
+24 pairs from 12 UAV images
+SIFT+NN                matches=  544.9  prec=0.887  ransac_inlier=0.887  H_err=  0.09px  extract=  66.0ms match=   1.8ms
+SuperPoint+NN          matches=  718.0  prec=0.955  ransac_inlier=0.954  H_err=  0.14px  extract= 631.6ms match=   2.3ms
+SIFT+LightGlue         matches=  619.5  prec=0.968  ransac_inlier=0.968  H_err=  0.10px  extract=  59.3ms match= 172.9ms
+SuperPoint+LightGlue   matches=  801.2  prec=0.971  ransac_inlier=0.971  H_err=  0.18px  extract= 611.4ms match=  97.3ms
+saved /home/ubuntu/repos/lightglue-from-scratch/results/uav_benchmark.csv
+
+== resolution sweep (SuperPoint+LightGlue, SIFT+NN) ==
+  res= 512 SuperPoint+LightGlue   matches=  268.0  prec=0.831  total=  379.3ms
+  res= 512 SIFT+NN                matches=  512.7  prec=0.895  total=   88.9ms
+  res= 768 SuperPoint+LightGlue   matches=  490.7  prec=0.916  total=  822.7ms
+  res= 768 SIFT+NN                matches=  489.7  prec=0.863  total=  105.0ms
+  res=1024 SuperPoint+LightGlue   matches=  800.0  prec=0.965  total= 1360.5ms
+  res=1024 SIFT+NN                matches=  482.5  prec=0.850  total=  121.6ms
+  res=1536 SuperPoint+LightGlue   matches=  855.3  prec=0.982  total= 2992.7ms
+  res=1536 SIFT+NN                matches=  498.3  prec=0.870  total=  231.5ms

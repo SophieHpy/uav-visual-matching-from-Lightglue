@@ -18,7 +18,27 @@ identical** to the official pretrained weights, plus a minimal training loop.
 | Pair demo + viz | `scripts/run_match.py` | saves `results/*.png` |
 | CPU benchmark | `scripts/benchmark.py` | parity with official impl |
 | Mini training loop | `scripts/train_mini.py` | homography-supervised, CPU-friendly |
-| Chinese study notes | `docs/00`–`05` | step-by-step walkthrough |
+| SIFT extractor + NN baseline | `src/sift.py`, `src/matcher_nn.py` | OpenCV SIFT + RootSIFT, mutual-NN/ratio baseline |
+| UAV benchmark | `scripts/uav_benchmark.py` | 24 homography-verified aerial pairs, 4 metrics |
+| Chinese study notes | `docs/00`–`06` | step-by-step walkthrough |
+
+## UAV Visual Matching Benchmark
+
+Real UAV photos (OpenDroneMap Aukerman) warped by random homographies →
+24 pairs with exact ground truth. Full report: `docs/06-benchmark.md`.
+
+![benchmark](results/uav_benchmark.png)
+
+| Method | Matches | GT precision | RANSAC inlier | Latency (CPU) |
+|--------|---------|--------------|---------------|---------------|
+| SIFT + NN | 545 | 88.7% | 88.7% | 68ms |
+| SuperPoint + NN | 718 | 95.5% | 95.4% | 634ms |
+| SIFT + LightGlue | 620 | **96.8%** | 96.8% | 232ms |
+| SuperPoint + LightGlue | **801** | **97.1%** | 97.1% | 709ms |
+
+Takeaways: the learned matcher lifts SIFT by +8pt precision and adds
+~47% more matches for SuperPoint; SuperPoint+LightGlue scales with
+input resolution (855 matches @1536px) while SIFT saturates ~500.
 
 ## Verification (the point of this repo)
 

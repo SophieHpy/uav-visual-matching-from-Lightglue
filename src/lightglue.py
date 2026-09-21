@@ -222,6 +222,7 @@ class LightGlue(nn.Module):
         depth_confidence: float = 0.95,
         width_confidence: float = 0.99,
         filter_threshold: float = 0.1,
+        add_scale_ori: bool = False,
     ):
         super().__init__()
         self.conf = {
@@ -232,13 +233,18 @@ class LightGlue(nn.Module):
             "depth_confidence": depth_confidence,
             "width_confidence": width_confidence,
             "filter_threshold": filter_threshold,
+            "add_scale_ori": add_scale_ori,
         }
         d = descriptor_dim
         self.input_proj = (
             nn.Linear(input_dim, d) if input_dim != d else nn.Identity()
         )
         head_dim = d // num_heads
-        self.posenc = LearnableFourierPositionalEncoding(2, head_dim)
+        # SIFT-style features also encode per-point scale/orientation,
+        # which ride along as two extra positional channels
+        self.posenc = LearnableFourierPositionalEncoding(
+            2 + 2 * add_scale_ori, head_dim
+        )
         self.layers = nn.ModuleList(
             [TransformerLayer(d, num_heads) for _ in range(n_layers)]
         )
@@ -271,6 +277,17 @@ class LightGlue(nn.Module):
         kpts1 = normalize_keypoints(
             data["image1"]["keypoints"], data["image1"].get("image_size")
         )
+        if self.conf["add_scale_ori"]:
+            kpts0 = torch.cat(
+                [kpts0, data["image0"]["scales"][..., None],
+                 data["image0"]["oris"][..., None]],
+                -1,
+            )
+            kpts1 = torch.cat(
+                [kpts1, data["image1"]["scales"][..., None],
+                 data["image1"]["oris"][..., None]],
+                -1,
+            )
         desc0 = self.input_proj(data["image0"]["descriptors"].detach())
         desc1 = self.input_proj(data["image1"]["descriptors"].detach())
         enc0 = self.posenc(kpts0)
