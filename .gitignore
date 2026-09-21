@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+weights/
+results/*.png
+results/*.jpg
+.ipynb_checkpoints
